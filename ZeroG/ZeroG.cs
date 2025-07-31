@@ -14,10 +14,13 @@ namespace ZeroG
         bool zg = false;
         public void FixedUpdate()
         {
-            if (ControllerInputPoller.instance.leftControllerPrimaryButton && Time.time >= nextAllowedTime && NetworkSystem.Instance.GameModeString.Contains("MODDED"))
+            if (NetworkSystem.Instance.GameModeString.Contains("MODDED"))
             {
-                zg = !zg;
-                nextAllowedTime = Time.time + cooldownTime;
+                if (ControllerInputPoller.instance.leftControllerPrimaryButton && Time.time >= nextAllowedTime)
+                {
+                    zg = !zg;
+                    nextAllowedTime = Time.time + cooldownTime;
+                }
             }
             if (canZerog && zg)
             {
